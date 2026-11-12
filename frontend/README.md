@@ -3,6 +3,15 @@
     npm install
     npm run dev
 
-The frontend runs on mock data and a simulated GPS loop. All data access is in `src/api/client.js`.
-When the Next.js backend is ready, replace the mock functions there with `fetch(VITE_API_URL + '/api/...')`.
-The map is an SVG placeholder; swap `MapView` in `src/components.jsx` for Google Maps or Mapbox later.
+Start the backend in a separate terminal first:
+
+    cd ../backend
+    npm run dev
+
+For local development, the frontend's Vite server proxies `/api` requests to the backend on port `3000`.
+If the frontend and backend are deployed on different origins, set `VITE_API_URL` in
+`frontend/.env.local` (for example `https://your-backend.example.com`) and rebuild the frontend.
+Sign in with the app passcode configured on the backend (`APP_PASSCODE`).
+
+All data comes from the Next.js backend through `src/api/client.js` and refreshes every 10 seconds.
+The map uses Leaflet with OpenStreetMap tiles (no API key needed).
